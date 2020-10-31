@@ -1,0 +1,496 @@
+﻿
+@{
+    ViewBag.Title = "CreatePO";
+}
+
+<head>
+    <link href="~/Layer STYLE/CreatePO.css" rel="stylesheet" />
+</head>
+
+<section class="myBody">
+    <div class="p-card">
+        <div class="p-card-body">
+            <div class="one">
+                <div class="content">
+                    <span>PO number</span>
+                    <input type="text" class="myInput" />
+                </div>
+                <div class="content">
+                    <span class="p-white">.</span>
+                    <input type="text" class="myInput" data-toggle="tooltip" data-placement="top" title="Click me to find posted PO." readonly />
+                    <i class="fa fa-search fa-lg" id="i-btnLoad" data-toggle="tooltip" data-placement="top" title="Click me to find posted PO."></i>
+                </div>
+                <div class="content">
+                    <span>PO date</span>
+                    <input type="date" class="myInput" style="width:133px" id="dtFrom" onkeydown="return false"/>
+                </div>
+                <div class="content">
+                    <span>Status</span>
+                    <input type="text" class="myInput" id="txtRefno" readonly />
+                </div>
+                <div class="content">
+                    <span>PO type</span>
+                    <select class="mySelect">
+                        <option>REAGENT</option>
+                        <option>ASSET</option>
+                        <option>MACRO</option>
+                    </select>
+                </div>
+                <div class="content" hidden>
+                    <span>ITEM3 type</span>
+                    <input type="text" class="myInput" id="txtRefno" readonly />
+                </div>
+                <div></div>
+
+                <div class="content" hidden>
+                    <span>.</span>
+                    <input type="text" class="myInput inputBtn" id="txtRefno" value="Create New" readonly />
+                </div>
+                <div class="content" hidden>
+                    <span>.</span>
+                    <input type="text" class="myInput inputBtn" id="txtRefno" value="Create ITEM3" readonly />
+                </div>
+                <div class="content" hidden>
+                    <span>.</span>
+                    <input type="text" class="myInput inputBtn" id="txtRefno" value="View MH PO" readonly />
+                </div>
+
+            </div>
+            <div class="two">
+                <div class="content">
+                    <span>Vendor code</span>
+                    <input type="text" class="myInput"  id="txtVendorCode" readonly/>
+                </div>
+                <div class="content">
+                    <span>Vendor Name</span>
+                    <input type="text" class="myInput" id="txtVendorName" placeholder="Type your vendor here.."/>
+                </div>
+                <div class="content">
+                    <span>Contact Person</span>
+                    <input type="text" class="myInput" readonly/>
+                </div>
+                <div class="content">
+                    <span>Phone Number</span>
+                    <input type="text" class="myInput" readonly/>
+                </div>
+                <div class="content">
+                    <span>FAX Number</span>
+                    <input type="text" class="myInput" readonly/>
+                </div>
+            </div>
+            <div class="three">
+                <div class="content">
+                    <span>PO for warehouse</span>
+                    <select class="mySelect" id="cboPoFor">
+                        <option>DEL MONTE</option>
+                        <option>LAS PIÑAS</option>
+                        <option>CDO</option>
+                    </select>
+                </div>
+                <div class="content">
+                    <span>Destination</span>
+                    <select class="mySelect" id="cboDestination">
+                        <option>BRANCH 1</option>
+                        <option>BRANCH 2</option>
+                    </select>
+                </div>
+                <div class="content">
+                    <span>Deliver to</span>
+                    <select class="mySelect" id="cboDeliverTo">
+                        <option>BRANCH 1</option>
+                        <option>BRANCH 2</option>
+                    </select>
+                </div>
+                <div></div>
+                <div class="content">
+                    <span>Delivery schedule</span>
+                    <select class="mySelect">
+                        <option>Rush Order</option>
+                        <option>Saturday Schedule: 9:00-11:00am only</option>
+                        <option>Errands</option>
+                        <option>11:00-12nn / 1:00-5:00pm only</option>
+                    </select>
+                </div>
+                <div class="content">
+                    <span>Delivery date from</span>
+                    <input type="date" class="myInput" id="dtFrom" onkeydown="return false" value=""/>
+                </div>
+                <div class="content">
+                    <span>Delivery date to</span>
+                    <input type="date" class="myInput" id="dtFrom" onkeydown="return false" />
+                </div>
+            </div>
+            <div class="four">
+                <div class="content">
+                    <span>Prepared By</span>
+                    <input type="text" class="myInput" readonly/>
+                </div>
+                <div class="content">
+                    <span>Approved By</span>
+                    <select class="mySelect">
+                        <option>Grace Chua</option>
+                        <option>Kendrick So</option>
+                        <option>Lionell Lee</option>
+                    </select>
+                </div>
+                <div></div>
+                <div class="content">
+                    <span>Remarks</span>
+                    <input type="text" class="myInput" />
+                </div>
+            </div>
+            <br />
+            <div class="four-half">
+                <div class="content">
+                    <span>Find item</span>
+                    <input type="text" class="myInput" />
+                </div>
+                <div class="content">
+                    <span>UOM</span>
+                    <input type="text" class="myInput" readonly />
+                </div>
+                <div class="content">
+                    <span>CONV</span>
+                    <input type="text" class="myInput" readonly />
+                </div>
+                <div class="content">
+                    <span>QTY</span>
+                    <input type="text" class="myInput" readonly />
+                </div>
+                <div class="content">
+                    <span>.</span>
+                    <input type="text" class="myInput inputBtn" value="Add item" data-toggle="tooltip" data-placement="top" title="Click me to add your item to the list." readonly />
+                </div>
+            </div>
+            <div class="five">
+                <div class="testingDiv">
+                    <div class="table-responsive" id="divTable">
+                        <table class="table table-inverse table-bordered" id="tbl-PO">
+                            <thead class="mytable">
+                                <tr>
+                                    <th style="width:30em!important;" class="th-L">Item Information</th>
+                                    <th style="width:4em!important;" class="th-M">Lot</th>
+                                    <th style="width:10em!important;" class="th-M">UOM (CONV)</th>
+                                    <th style="width:10em!important;" class="th-M">PO Qty</th>
+                                    <th style="width:10em!important;" class="th-M">AppQty</th>
+                                    <th style="width:10em!important;" class="th-M">Price</th>
+                                    <th style="width:10em!important;" class="th-M">Discount</th>
+                                    <th style="width:10em!important;" class="th-M">Total</th>
+                                    <th style="width:30em!important;" class="th-M">Remarks</th>
+                                    <th style="width:10em!important;" class="th-M">GLAccount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <span class="badge badge-warning" id="ln">1</span>
+                                        <span class="badge badge-warning" id="d-itemCode">C000000020</span>
+                                        <span class="d-block">SCRUBBING PAD (FOR CR ONLY)</span>
+                                    </td>
+                                    <td class="td-M">N</td>
+                                    <td class="td-M">CASSETE(100)</td>
+                                    <td class="td-M">
+                                        <b>10</b>
+                                        @*<input type="text" class="table-input" id="qty_chk" name="NumSet" autocomplete="off" readonly/>*@
+                                    </td>
+                                    <td class="td-M"><b>10</b></td>
+                                    <td class="td-M">1,000</td>
+                                    <td class="td-M">10</td>
+                                    <td class="td-M">990</td>
+                                    <td class="td-M">
+                                        <input type="text" class="table-input" id="d-remarks" autocomplete="off" />
+                                    </td>
+                                    <td class="td-M">_021354658989</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="badge badge-warning" id="ln">1</span>
+                                        <span class="badge badge-warning" id="d-itemCode">C000000020</span>
+                                        <span class="d-block">SCRUBBING PAD (FOR CR ONLY)</span>
+                                    </td>
+                                    <td class="td-M">N</td>
+                                    <td class="td-M">CASSETE(100)</td>
+                                    <td class="td-M">
+                                        <b>10</b>
+                                        @*<input type="text" class="table-input" id="qty_chk" name="NumSet" autocomplete="off" readonly/>*@
+                                    </td>
+                                    <td class="td-M"><b>10</b></td>
+                                    <td class="td-M">1,000</td>
+                                    <td class="td-M">10</td>
+                                    <td class="td-M">990</td>
+                                    <td class="td-M">
+                                        <input type="text" class="table-input" id="d-remarks" autocomplete="off" />
+                                    </td>
+                                    <td class="td-M">_021354658989</td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <span class="badge badge-warning" id="ln">1</span>
+                                        <span class="badge badge-warning" id="d-itemCode">C000000020</span>
+                                        <span class="d-block">SCRUBBING PAD (FOR CR ONLY)</span>
+                                    </td>
+                                    <td class="td-M">N</td>
+                                    <td class="td-M">CASSETE(100)</td>
+                                    <td class="td-M">
+                                        <b>10</b>
+                                        @*<input type="text" class="table-input" id="qty_chk" name="NumSet" autocomplete="off" readonly/>*@
+                                    </td>
+                                    <td class="td-M"><b>10</b></td>
+                                    <td class="td-M">1,000</td>
+                                    <td class="td-M">10</td>
+                                    <td class="td-M">990</td>
+                                    <td class="td-M">
+                                        <input type="text" class="table-input" id="d-remarks" autocomplete="off" />
+                                    </td>
+                                    <td class="td-M">_021354658989</td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <span class="badge badge-warning" id="ln">1</span>
+                                        <span class="badge badge-warning" id="d-itemCode">C000000020</span>
+                                        <span class="d-block">SCRUBBING PAD (FOR CR ONLY)</span>
+                                    </td>
+                                    <td class="td-M">N</td>
+                                    <td class="td-M">CASSETE(100)</td>
+                                    <td class="td-M">
+                                        <b>10</b>
+                                        @*<input type="text" class="table-input" id="qty_chk" name="NumSet" autocomplete="off" readonly/>*@
+                                    </td>
+                                    <td class="td-M"><b>10</b></td>
+                                    <td class="td-M">1,000</td>
+                                    <td class="td-M">10</td>
+                                    <td class="td-M">990</td>
+                                    <td class="td-M">
+                                        <input type="text" class="table-input" id="d-remarks" autocomplete="off" />
+                                    </td>
+                                    <td class="td-M">_021354658989</td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <span class="badge badge-warning" id="ln">1</span>
+                                        <span class="badge badge-warning" id="d-itemCode">C000000020</span>
+                                        <span class="d-block">SCRUBBING PAD (FOR CR ONLY)</span>
+                                    </td>
+                                    <td class="td-M">N</td>
+                                    <td class="td-M">CASSETE(100)</td>
+                                    <td class="td-M">
+                                        <b>10</b>
+                                        @*<input type="text" class="table-input" id="qty_chk" name="NumSet" autocomplete="off" readonly/>*@
+                                    </td>
+                                    <td class="td-M"><b>10</b></td>
+                                    <td class="td-M">1,000</td>
+                                    <td class="td-M">10</td>
+                                    <td class="td-M">990</td>
+                                    <td class="td-M">
+                                        <input type="text" class="table-input" id="d-remarks" autocomplete="off" />
+                                    </td>
+                                    <td class="td-M">_021354658989</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="badge badge-warning" id="ln">1</span>
+                                        <span class="badge badge-warning" id="d-itemCode">C000000020</span>
+                                        <span class="d-block">SCRUBBING PAD (FOR CR ONLY)</span>
+                                    </td>
+                                    <td class="td-M">N</td>
+                                    <td class="td-M">CASSETE(100)</td>
+                                    <td class="td-M">
+                                        <b>10</b>
+                                        @*<input type="text" class="table-input" id="qty_chk" name="NumSet" autocomplete="off" readonly/>*@
+                                    </td>
+                                    <td class="td-M"><b>10</b></td>
+                                    <td class="td-M">1,000</td>
+                                    <td class="td-M">10</td>
+                                    <td class="td-M">990</td>
+                                    <td class="td-M">
+                                        <input type="text" class="table-input" id="d-remarks" autocomplete="off" />
+                                    </td>
+                                    <td class="td-M">_021354658989</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="badge badge-warning" id="ln">1</span>
+                                        <span class="badge badge-warning" id="d-itemCode">C000000020</span>
+                                        <span class="d-block">SCRUBBING PAD (FOR CR ONLY)</span>
+                                    </td>
+                                    <td class="td-M">N</td>
+                                    <td class="td-M">CASSETE(100)</td>
+                                    <td class="td-M">
+                                        <b>10</b>
+                                        @*<input type="text" class="table-input" id="qty_chk" name="NumSet" autocomplete="off" readonly/>*@
+                                    </td>
+                                    <td class="td-M"><b>10</b></td>
+                                    <td class="td-M">1,000</td>
+                                    <td class="td-M">10</td>
+                                    <td class="td-M">990</td>
+                                    <td class="td-M">
+                                        <input type="text" class="table-input" id="d-remarks" autocomplete="off" />
+                                    </td>
+                                    <td class="td-M">_021354658989</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="badge badge-warning" id="ln">1</span>
+                                        <span class="badge badge-warning" id="d-itemCode">C000000020</span>
+                                        <span class="d-block">SCRUBBING PAD (FOR CR ONLY)</span>
+                                    </td>
+                                    <td class="td-M">N</td>
+                                    <td class="td-M">CASSETE(100)</td>
+                                    <td class="td-M">
+                                        <b>10</b>
+                                        @*<input type="text" class="table-input" id="qty_chk" name="NumSet" autocomplete="off" readonly/>*@
+                                    </td>
+                                    <td class="td-M"><b>10</b></td>
+                                    <td class="td-M">1,000</td>
+                                    <td class="td-M">10</td>
+                                    <td class="td-M">990</td>
+                                    <td class="td-M">
+                                        <input type="text" class="table-input" id="d-remarks" autocomplete="off" />
+                                    </td>
+                                    <td class="td-M">_021354658989</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="badge badge-warning" id="ln">1</span>
+                                        <span class="badge badge-warning" id="d-itemCode">C000000020</span>
+                                        <span class="d-block">SCRUBBING PAD (FOR CR ONLY)</span>
+                                    </td>
+                                    <td class="td-M">N</td>
+                                    <td class="td-M">CASSETE(100)</td>
+                                    <td class="td-M">
+                                        <b>10</b>
+                                        @*<input type="text" class="table-input" id="qty_chk" name="NumSet" autocomplete="off" readonly/>*@
+                                    </td>
+                                    <td class="td-M"><b>10</b></td>
+                                    <td class="td-M">1,000</td>
+                                    <td class="td-M">10</td>
+                                    <td class="td-M">990</td>
+                                    <td class="td-M">
+                                        <input type="text" class="table-input" id="d-remarks" autocomplete="off" />
+                                    </td>
+                                    <td class="td-M">_021354658989</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="badge badge-warning" id="ln">1</span>
+                                        <span class="badge badge-warning" id="d-itemCode">C000000020</span>
+                                        <span class="d-block">SCRUBBING PAD (FOR CR ONLY)</span>
+                                    </td>
+                                    <td class="td-M">N</td>
+                                    <td class="td-M">CASSETE(100)</td>
+                                    <td class="td-M">
+                                        <b>10</b>
+                                        @*<input type="text" class="table-input" id="qty_chk" name="NumSet" autocomplete="off" readonly/>*@
+                                    </td>
+                                    <td class="td-M"><b>10</b></td>
+                                    <td class="td-M">1,000</td>
+                                    <td class="td-M">10</td>
+                                    <td class="td-M">990</td>
+                                    <td class="td-M">
+                                        <input type="text" class="table-input" id="d-remarks" autocomplete="off" />
+                                    </td>
+                                    <td class="td-M">_021354658989</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="badge badge-warning" id="ln">1</span>
+                                        <span class="badge badge-warning" id="d-itemCode">C000000020</span>
+                                        <span class="d-block">SCRUBBING PAD (FOR CR ONLY)</span>
+                                    </td>
+                                    <td class="td-M">N</td>
+                                    <td class="td-M">CASSETE(100)</td>
+                                    <td class="td-M">
+                                        <b>10</b>
+                                        @*<input type="text" class="table-input" id="qty_chk" name="NumSet" autocomplete="off" readonly/>*@
+                                    </td>
+                                    <td class="td-M"><b>10</b></td>
+                                    <td class="td-M">1,000</td>
+                                    <td class="td-M">10</td>
+                                    <td class="td-M">990</td>
+                                    <td class="td-M">
+                                        <input type="text" class="table-input" id="d-remarks" autocomplete="off" />
+                                    </td>
+                                    <td class="td-M">_021354658989</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="badge badge-warning" id="ln">1</span>
+                                        <span class="badge badge-warning" id="d-itemCode">C000000020</span>
+                                        <span class="d-block">SCRUBBING PAD (FOR CR ONLY)</span>
+                                    </td>
+                                    <td class="td-M">N</td>
+                                    <td class="td-M">CASSETE(100)</td>
+                                    <td class="td-M">
+                                        <b>10</b>
+                                        @*<input type="text" class="table-input" id="qty_chk" name="NumSet" autocomplete="off" readonly/>*@
+                                    </td>
+                                    <td class="td-M"><b>10</b></td>
+                                    <td class="td-M">1,000</td>
+                                    <td class="td-M">10</td>
+                                    <td class="td-M">990</td>
+                                    <td class="td-M">
+                                        <input type="text" class="table-input" id="d-remarks" autocomplete="off" />
+                                    </td>
+                                    <td class="td-M">_021354658989</td>
+                                </tr>
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="six">
+                <div class="content">
+                    <span>.</span>
+                    <input type="text" class="myInput inputBtn" value="Post" readonly />
+                </div>
+                <div class="content">
+                    <span>.</span>
+                    <input type="text" class="myInput inputBtn" value="Print" readonly />
+                </div>
+                <div class="content">
+                    <span>.</span>
+                    <input type="text" class="myInput inputBtn" value="Close PO" readonly />
+                </div>
+                <div class="content">
+                    <span>.</span>
+                    <input type="text" class="myInput inputBtn" value="Duplicate" readonly />
+                </div>
+
+                <div></div>
+                <div class="content specialInput">
+                    <span>TOTAL</span>
+                    <input type="text" class="myInput" readonly />
+                </div>
+                <div class="content specialInput">
+                    <span>DISCOUNT</span>
+                    <input type="text" class="myInput" readonly />
+                </div>
+                <div class="content specialInput">
+                    <span>DISCOUNT SUM</span>
+                    <input type="text" class="myInput" readonly />
+                </div>
+                <div class="content specialInput">
+                    <span>NET</span>
+                    <input type="text" class="myInput" readonly />
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('#overlay').fadeOut();
+        });
+    </script>
+    <script src="~/Layer BEHAVIOR/CreatePO.js"></script>
+    <script src="~/Layer BEHAVIOR/Tools.js"></script>
+}
