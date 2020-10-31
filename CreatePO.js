@@ -16,7 +16,7 @@ function initialLoad() {
     vdtl["CardCode"] = "";
     dtl.push(vdtl);
 
-    ApiAjax("http://172.30.1.167:85/api/TollsApi/GetSupplier", dtl, function (data) {
+    ApiAjax("YourServer/api/YourApiController/YourMethodName", dtl, function (data) {
 
         if (data.length > 0) {
             dtl = [];
